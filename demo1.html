@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+	<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>demo1</title>
+		 <!-- ECharts单文件引入 -->
+		<script type="text/javascript" src='http://echarts.baidu.com/build/dist/echarts.js'></script>
+	</head>
+	<body>
+		<div id="main" style="height:400px;"></div>
+	</body>
+
+	<script type="text/javascript">
+		require.config({
+			paths:{
+				echarts: 'http://echarts.baidu.com/build/dist'
+			}
+		});
+		
+	
+		require(
+			[
+				'echarts',
+				'echarts/chart/bar' // 使用柱状图就加载bar模块，按需加载
+			],
+			
+			function (ec) {
+				// 基于准备好的dom，初始化echarts图表
+                var myChart = ec.init(document.getElementById('main')); 
+				
+				var option = {
+					tooltip:{
+						show:true
+					},
+					
+					legend:{
+						data:['销量', 'GMV']
+					},
+					
+					xAxis:[
+						{
+							type:'category',
+							data:['周一','周二','周三','周四','周五']
+						}
+					],
+					
+					yAxis:[
+						{
+							type:'value'
+						}
+					],
+					
+					series:[
+						{
+							"name":"销量",
+							"type":"bar",
+							"data":[5, 20, 40, 10, 10]
+						},
+						
+						{
+							"name":"GMV",
+							"type":"bar",
+							"data":[1223.34, 4343.44, 434.4, 43434.3, 10]
+						}
+					]
+				};
+				
+				// 为echarts对象加载数据 
+                myChart.setOption(option); 
+			}
+			
+		);
+	</script>
+</html>
